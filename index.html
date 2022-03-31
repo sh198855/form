@@ -7,44 +7,87 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="#">
-        <p><i>Пожалуйста, заполните форму регистрации пользователей. Обязательные поля помечены </i><em>*</em></p>
-        <fieldset>
-          <legend>Контактная информация</legend>
-            <label for="name">Фамилия <em>*</em></label>
-            <input id="name"><br>
-            <label for="name">Имя <em>*</em></label>
-            <input id="name"><br>
-            <label for="name">Отчество</label>
-            <input id="name"><br>
-            <label for="telephone">Телефон <em>*</em></label>
-            <input id="telephone"><br>
-            <label for="email">Email <em>*</em></label>
-            <input id="email"><br>
-        </fieldset>
-        <fieldset>
-          <legend>Персональная информация</legend>
-            <label for="age">Возраст<em>*</em></label>
-            <input id="age"><br>
-            <label for="gender">Пол</label>
-            <select id="gender">
-              <option value="female">Мужской</option>
-              <option value="male">Женский</option>
-            </select><br>
-            <label for="comments">Перечислите дополнительную информацию, которую вы хотели бы сообщить о себе</label>
-            <textarea id="comments"></textarea>
-        </fieldset>
-        <fieldset>
-          <legend>Выберите ваши увлечения</legend>
-          <label for="sport"><input id="sport" type="checkbox"> Спорт</label>
-          <label for="tourist"><input id="tourist" type="checkbox"> Туризм</label>
-          <label for="padi"><input id="padi" type="checkbox"> Дайвинг</label>
-          <label for="travels"><input id="travels" type="checkbox"> Путешествия</label>
-          <label for="auto"><input id="auto" type="checkbox"> Автомобили</label>
-          <label for="it"><input id="it" type="checkbox"> IT</label>
-        </fieldset>
+    <form action="/" id="personal-data" method="get"> 
+        <label for="name">Фамилия <em>*</em></label>
+        <input id="name" name="last-name" value="Норматова"><br> <!--value выбор по умолчанию -->
+        <label for="name">Имя <em>*</em></label>
+        <input id="name" name="first_name" ><br>
+        <label for="name">Отчество</label>
+        <input id="name" name="patronymic"><br>
+        <label for="telephone">Телефон <em>*</em></label>
+        <input id="telephone" name="phone"><br>
+        <label for="email">Email <em>*</em></label>
+        <input id="email" name="Mail"><br>
+        <label for="age">Возраст<em>*</em></label>
+        <input id="age" name="age" required><br> <!--required обязательное заполнение поля-->
+        <label for="gender">Пол</label>
+        <select id="gender">
+          <option value="none" selected>/</option> <!--selected выбор по умолчанию -->
+          <option value="female">Мужской</option>
+          <option value="male">Женский</option>
+        </select><br>
+        <label for="comments">Перечислите дополнительную информацию, которую вы хотели бы сообщить о себе</label>
+        <textarea id="comments" style="width: 300px; height: 200px; resize: none;"></textarea> <!--resize отменить расстягивание -->
+        <label for="sport"><input id="sport" type="checkbox"> Спорт</label>
+        <label for="tourist"><input id="tourist" type="checkbox"> Туризм</label>
+        <label for="padi"><input id="padi" type="checkbox"> Дайвинг</label>
+        <label for="travels"><input id="travels" type="checkbox" checked> Путешествия</label> <!--checked выбор по умолчанию -->
+        <label for="auto"><input id="auto" type="checkbox"> Автомобили</label>
+        <label for="it"><input id="it" type="checkbox"> IT</label>
         <p><input type="submit" value="Отправить информацию"></p>
-      </form>
+
+        <input type="password">
+        <input type="range" max="26" min="15">
+        <label for="pattern">pattern</label>
+        <input id="pattern" type="text" pattern="[0-9]{5}-[Aa-Zz]{3}"><br> <!--pattern регулярное выражение-->
+        <label for="phone">Phone namber</label>
+        <input id="phone" type="text" pattern="[+][7]-[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}" value="+7-988-977-55-44"> <!--pattern регулярное выражение со значение по умолчанию value-->
+        <label for="focus">focus</label>
+        <input type="text" id="focus" autofocus> <!--autofocus-->
+         <input type="date">
+         <input type="date">
+         <input type="datetime-local">
+         <input type="month">
+         <input type="week">
+        <br> <br>
+
+         <div>
+            <fieldset>
+                <legend>Выберите любимый фрукт</legend>
+                <label for="fruit">Фрукт</label>
+                <input id="fruit" list="dl_fruits">
+            </fieldset>
+            <datalist id="dl_fruits">
+                <option label="Яблоко" value="apple">
+                <option label="Ананас" value="ananas">
+                <option label="Абрикос" value="apricot">
+                <option label="Арбуз" value="watermelon">
+                <option label="Авокадо" value="avocado">
+                <option label="Апельсин" value="Orange">
+            </datalist>
+        </div>
+
+        <br> <br>
+        <progress value="0.25"></progress>
+        <progress value="50" max="200"></progress>
+        Пройденная дистанция: <meter min="5" max="70" value="28"> 28 метров</meter>
+    </form>
+
+    <script>
+        let personalData = document.getElementById('personal-data');
+        if(personalData) {
+            personalData.addEventListener('submit', function(e) {
+
+                e.preventDefault();
+                let form = new FormData(personalData)
+                let value = ''
+                form.forEach(element => {
+                    value += element + '\n'
+                });
+                alert(value)
+            }) 
+        }
+    </script>
 </body>
 </html>
 
